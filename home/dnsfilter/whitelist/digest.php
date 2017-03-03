@@ -49,7 +49,7 @@ class digest
 
         private function resetNonce()
         {
-            $_SESSION['authnonce'] = bin2hex(random_bytes(20));
+            $_SESSION['authnonce'] = bin2hex(openssl_random_pseudo_bytes(20));
             header('HTTP/1.1 401 Unauthorized');
             header('WWW-Authenticate: Digest realm="'.$this->getRealm().
                 '",qop="auth",nonce="'.$_SESSION['authnonce'].'",opaque="'.md5($this->getRealm()).'"');
@@ -61,14 +61,14 @@ class digest
     {
         // analyze the PHP_AUTH_DIGEST variable
         if (!($data = $this->http_digest_parse($_SERVER['PHP_AUTH_DIGEST']))
-            || !isset($users[$data['username']])
+            || !isset($this->getUsers()[$data['username']])
         ) {
             die($this->message);
         }
 
         // generate the valid response
         $A1 = md5(
-            $data['username'] . ':' . $realm . ':' . $users[$data['username']]
+            $data['username'] . ':' . $this->getRealm() . ':' . $this->getUsers()[$data['username']]
         );
         $A2 = md5($_SERVER['REQUEST_METHOD'] . ':' . $data['uri']);
         $valid_response = md5(
