@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <?php
-	require "../digest.php";
+    require "../auth.php";
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Edition de la liste blanche</title>

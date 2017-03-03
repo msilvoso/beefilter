@@ -1,2 +1,3 @@
 <?php
-$users=array('admin' => 'password');
+//user => password
+return array('admin' => 'password');
