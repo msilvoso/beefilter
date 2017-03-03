@@ -29,13 +29,14 @@ class whitelist
         $whiteListArr = explode("\n", $whiteList);
         foreach($whiteListArr as $key => $line) {
             $line = trim($line);
-            if (strlen($line) === 0) 
+            if (strlen($line) === 0) { 
                 $whiteListArr[$key] = $line;
-                continue; //empty
+		continue; //empty
+            }
             if (substr($line,0,1) === '#') {
                 $whiteListArr[$key] = htmlspecialchars($line, ENT_QUOTES);
                 continue; //comment
-	        }
+            }
 
             $line = preg_replace('#^https?://#', '', $line);
             $line = preg_replace('#^www\.#', '', $line);
