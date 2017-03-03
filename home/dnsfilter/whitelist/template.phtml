@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edition de la liste blanche</title>
+</head>
+<body>
+	<h1>Liste blanche des sites autorisés</h1>
+<?php if ($displayMessage): ?>
+    <p style="color:green;">Liste enregistrée avec succès</p>
+<?php else: ?>
+    <p></p>
+<?php endif; ?>
+<form action="/index.php" method="post">
+    <input type="submit" name="submit" value="appliquer"/>
+    <a href="/?logout=1">Déconnexion</a><br/>
+    <textarea name="whitelist" rows="40" cols="80"><?php echo $whiteListContent;?></textarea>
+</form>
+<h2>Liste de sites permis par défaut</h2>
+<pre>
+		<?php echo $whiteList->loadDefault(); ?>
+	</pre>
+</body>
