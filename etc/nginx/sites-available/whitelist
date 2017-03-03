@@ -1,0 +1,15 @@
+server {
+	listen 8080 default_server;
+	root /home/dnsfilter/whitelist/public;
+	index index.php;
+	server_name _;
+
+	location / {
+		try_files $uri $uri/ /index.php$is_args$args;
+	}
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php5-fpm_whitelist.sock;
+	}
+}

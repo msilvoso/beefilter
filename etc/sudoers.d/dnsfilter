@@ -1,0 +1,1 @@
+dnsfilter ALL=(ALL) NOPASSWD:/usr/local/bin/dnsmasqconfig

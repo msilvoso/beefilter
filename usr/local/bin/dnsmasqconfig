@@ -1,0 +1,10 @@
+#!/bin/bash
+ipaddr=$(/sbin/ip address show dev eth0 | /bin/grep 'inet ' | /usr/bin/perl -pe 's/\D*([\d.]*).*/$1/')
+gateway=$(/sbin/ip route show | /bin/grep default | /usr/bin/perl -pe 's/\D*([\d.]*).*/$1/')
+/bin/cp /home/dnsfilter/99.conf /etc/dnsmasq.d/
+/bin/sed -i "s/IPREPLACE/$ipaddr/" /etc/dnsmasq.d/99.conf 
+
+/bin/cat /home/dnsfilter/whitelist/whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/50.conf
+/bin/cat /home/dnsfilter/whitelist/default.whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/40.conf
+
+/usr/sbin/service dnsmasq restart
