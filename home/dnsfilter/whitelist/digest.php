@@ -128,14 +128,4 @@ class digest
     {
         $this->message = $message;
     }
-
-    public function getAuthok()
-    {
-        return $this->authok;
-    }
-
-    public function setAuthok($authok)
-    {
-        $this->authok = $authok;
-    }
 }
