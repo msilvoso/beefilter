@@ -2,8 +2,8 @@
 
 class whitelist
 {
-    private $location = __DIR__.'/whitelist';
-    private $locationDefault = __DIR__.'/default.whitelist';
+    private $location = __DIR__.'/data/whitelist';
+    private $locationDefault = __DIR__ . '/data/default.whitelist';
 
     public function load()
     {
