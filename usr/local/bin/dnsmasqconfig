@@ -4,7 +4,7 @@ gateway=$(/sbin/ip route show | /bin/grep default | /usr/bin/perl -pe 's/\D*([\d
 /bin/cp /home/dnsfilter/99.conf /etc/dnsmasq.d/
 /bin/sed -i "s/IPREPLACE/$ipaddr/" /etc/dnsmasq.d/99.conf 
 
-/bin/cat /home/dnsfilter/whitelist/whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/50.conf
-/bin/cat /home/dnsfilter/whitelist/default.whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/40.conf
+/bin/cat /home/dnsfilter/whitelist/data/whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/50.conf
+/bin/cat /home/dnsfilter/whitelist/data/default.whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/40.conf
 
 /usr/sbin/service dnsmasq restart
