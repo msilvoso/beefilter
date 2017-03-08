@@ -1,0 +1,3 @@
+#!/bin/bash
+# reactivate dnsfilter failsafe
+/usr/local/bin/dnsmasqconfig
