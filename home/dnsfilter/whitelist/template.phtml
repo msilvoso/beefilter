@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edition de la liste blanche</title>
+    <title>Edition de la liste blanche</title>
 </head>
 <body>
-	<h1>Liste blanche des sites autorisés</h1>
+    <h1>Liste blanche des sites autorisés</h1>
+    <?php if (empty($existingJobs[0])): ?>
+        <a href="/?bypass=yes">Débloquer le filtre pour une heure</a>
+    <?php else: ?>
+        <a href="/?block=yes">Réactiver le filtre</a>
+    <?php endif; ?>
 <?php if ($displayMessage): ?>
     <p style="color:green;">Liste enregistrée avec succès</p>
 <?php else: ?>
-    <p></p>
+    <p>Le symbole '#' au début d'une ligne, désactive la ligne en question</p>
 <?php endif; ?>
 <form action="/index.php" method="post">
     <input type="submit" name="submit" value="appliquer"/>

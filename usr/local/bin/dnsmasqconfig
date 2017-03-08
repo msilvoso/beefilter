@@ -2,7 +2,13 @@
 ipaddr=$(/sbin/ip address show dev eth0 | /bin/grep 'inet ' | /usr/bin/perl -pe 's/\D*([\d.]*).*/$1/')
 gateway=$(/sbin/ip route show | /bin/grep default | /usr/bin/perl -pe 's/\D*([\d.]*).*/$1/')
 /bin/cp /home/dnsfilter/99.conf /etc/dnsmasq.d/
-/bin/sed -i "s/IPREPLACE/$ipaddr/" /etc/dnsmasq.d/99.conf 
+if [[ $1 == "bypass" ]]
+then
+	/bin/sed -i "s/IPREPLACE/$gateway/" /etc/dnsmasq.d/99.conf 
+	/bin/sed -i "s/address/server/" /etc/dnsmasq.d/99.conf 
+else
+	/bin/sed -i "s/IPREPLACE/$ipaddr/" /etc/dnsmasq.d/99.conf 
+fi
 
 /bin/cat /home/dnsfilter/whitelist/data/whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/50.conf
 /bin/cat /home/dnsfilter/whitelist/data/default.whitelist | perl -pe "s@^([\w-.]*)\$@server=/\$1/$gateway@" > /etc/dnsmasq.d/40.conf

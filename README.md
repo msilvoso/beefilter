@@ -8,6 +8,6 @@ Install a base Linux. In our example we installed Raspbian/Bananian on a *pi
 
 The directory tree in this repository is based on a debian based system but can easily be adapted.
 
-Install dnsmasq nginx php5-fpm sudo
+Install dnsmasq nginx php5-fpm sudo at
 
 Create the 'dnsfilter' user.
