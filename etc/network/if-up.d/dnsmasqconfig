@@ -1,2 +1,3 @@
 #!/bin/sh -e
+# or create a symlink here (easier)
 /usr/local/bin/dnsmasqconfig
