@@ -4,6 +4,7 @@
 
     $whiteList = new whitelist();
     $displayMessage = false;
+    $blockFlag = false;
     exec('sudo /usr/bin/at -l',$existingJobs);
     if (!empty($existingJobs[0])) {
         $job = preg_replace('/\D+.*/', '', $existingJobs[0]);
@@ -21,10 +22,12 @@
         if (!empty($_GET['bypass'])) {
              exec('sudo /usr/local/bin/dnsmasqconfig bypass');
              exec("echo '/usr/local/bin/dnsmasqconfig' | sudo /usr/bin/at 'now + 1 hours'");
+            $blockFlag = true;
         }
         if (!empty($_GET['block'])) {
              exec('sudo /usr/bin/at -r '.escapeshellarg($job)); 
              exec('sudo /usr/local/bin/dnsmasqconfig');
+             unset($existingJobs);
         }
     }
 

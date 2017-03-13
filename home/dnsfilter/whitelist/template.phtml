@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Liste blanche des sites autorisés</h1>
-    <?php if (empty($existingJobs[0])): ?>
+    <?php if (empty($existingJobs[0]) && !$blockFlag): ?>
         <a href="/?bypass=yes">Débloquer le filtre pour une heure</a>
     <?php else: ?>
         <a href="/?block=yes">Réactiver le filtre</a>
