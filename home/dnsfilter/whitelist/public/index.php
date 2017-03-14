@@ -21,7 +21,7 @@
         }
         if (!empty($_GET['bypass'])) {
              exec('sudo /usr/local/bin/dnsmasqconfig bypass');
-             exec("echo '/usr/local/bin/dnsmasqconfig' | sudo /usr/bin/at 'now + 1 hours'");
+             exec("sudo /usr/bin/at -f /usr/local/etc/atcommand 'now + 1 hours'");
             $blockFlag = true;
         }
         if (!empty($_GET['block'])) {

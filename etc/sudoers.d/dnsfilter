@@ -1,1 +1,1 @@
-dnsfilter ALL=(ALL) NOPASSWD:/usr/local/bin/dnsmasqconfig,/usr/bin/at
+dnsfilter ALL=(ALL) NOPASSWD:/usr/local/bin/dnsmasqconfig,/usr/bin/at -f /usr/local/etc/atcommand now + 1 hours,/usr/bin/at -r, /usr/bin/at -l
